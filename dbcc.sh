@@ -1,27 +1,22 @@
-end () {
-	mysqladmin shutdown
-	exit $1
-}
-
 if [ -z "$CHANGES_FILE" ]; then
 	echo "Missing environment variable CHANGES_FILE"
 	mysqladmin shutdown
-	end "1"
+	exit 1
 elif [ -z "$DB_HOST" ]; then
 	echo "Missing environment variable DB_HOST"
-	end "1"
+	exit 1
 elif [ -z "$DB_USER" ]; then
 	echo "Missing environment variable DB_USER"
-	end "1"
+	exit 1
 elif [ -z "$DB_PASS" ]; then
 	echo "Missing environment variable DB_PASS"
-	end "1"
+	exit 1
 elif [ -z "$CHANGES_DB" ]; then
 	echo "Missing environment variable CHANGES_DB"
-	end "1"
+	exit 1
 elif [ -z "$APP_DB" ]; then
 	echo "Missing environment variable APP_DB"
-	end "1"
+	exit 1
 fi
 
 if [ -z "$CHANGES_HOME" ]; then
@@ -30,7 +25,7 @@ fi
 
 if [ ! -f $CHANGES_HOME/$CHANGES_FILE ]; then
 	echo "Could not find changes file at $CHANGES_HOME/$CHANGES_FILE"
-	end "1"
+	exit 1
 fi
 
 export MYSQL_PWD=$DB_PASS
@@ -45,6 +40,11 @@ while read CHANGE; do
 		else
 			echo "Applying changeset - $CHANGE"
 			mysql -h "$DB_HOST" -u"$DB_USER" "$APP_DB" -s -N -e "`cat $CHANGES_FILE_PATH`"
+			if [ $? -eq 0 ]; then
+				echo "Fatal error running changeset $CHANGE"
+				exit 1
+			fi
+
 			mysql -h "$DB_HOST" -u"$DB_USER" changesets -s -N -e "INSERT INTO $APP_DB (file_path) VALUES ('$CHANGE')"
 		fi
 	else
@@ -53,4 +53,5 @@ while read CHANGE; do
 
 done < $CHANGES_HOME/$CHANGES_FILE
 
-end "0"
+# This is a success code
+exit 200

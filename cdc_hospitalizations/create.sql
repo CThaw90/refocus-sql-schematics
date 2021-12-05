@@ -10,6 +10,6 @@ CREATE TABLE cdc_hospitalizations (
 	age_category VARCHAR(15) NOT NULL,
 	sex_category VARCHAR(15) NOT NULL,
 	race_category VARCHAR(25) NOT NULL,
-	cumulative_rate DECIMAL(10, 10) NOT NULL DEFAULT '0.0',
-	weekly_rate DECIMAL(10, 10) NOT NULL DEFAULT '0.0'
+	cumulative_rate DECIMAL(15, 10) NOT NULL DEFAULT '0.0',
+	weekly_rate DECIMAL(15, 10) NOT NULL DEFAULT '0.0'
 );
