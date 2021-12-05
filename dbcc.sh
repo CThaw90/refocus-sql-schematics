@@ -23,6 +23,10 @@ if [ ! -f $CHANGES_FILE ]; then
 	exit 1
 fi
 
+if [ -z "$CHANGES_HOME" ]; then
+	CHANGES_HOME=.
+fi
+
 export MYSQL_PWD=$DB_PASS
 while read CHANGE; do
 	echo $CHANGE
@@ -35,11 +39,11 @@ while read CHANGE; do
 			echo "There is a record available"
 		else
 			echo "There is no record available"
-			mysql -h "$DB_HOST" -u"$DB_USER" "$APP_DB" -s -N -e "`cat $CHANGE`"
+			mysql -h "$DB_HOST" -u"$DB_USER" "$APP_DB" -s -N -e "`cat $CHANGES_HOME$CHANGE`"
 			mysql -h "$DB_HOST" -u"$DB_USER" changesets -s -N -e "INSERT INTO $APP_DB (file_path) VALUES ('$CHANGE')"
 		fi
 	else
 		echo "File $CHANGE not found"
 	fi
 
-done < $CHANGES_FILE
+done < $CHANGES_HOME/$CHANGES_FILE
