@@ -31,17 +31,16 @@ fi
 export MYSQL_PWD=$DB_PASS
 while read CHANGE; do
 	CHANGES_FILE_PATH="$CHANGES_HOME$CHANGE"
-	echo $CHANGES_FILE_PATH
 	if [ -f $CHANGES_FILE_PATH ]; then
 		applied=`mysql -h "$DB_HOST" -u"$DB_USER" changesets -s -N -e "SELECT applied FROM $APP_DB WHERE file_path='$CHANGE' LIMIT 1"`
-		echo $applied
 		if [ ${#applied} -eq 1 ]; then
-			echo "$CHANGE has already been applied"
+			echo "$CHANGE - has already been applied"
 		else
 			echo "Applying changeset - $CHANGE"
 			mysql -h "$DB_HOST" -u"$DB_USER" "$APP_DB" -s -N -e "`cat $CHANGES_FILE_PATH`"
 			if [ $? -eq 0 ]; then
 				mysql -h "$DB_HOST" -u"$DB_USER" changesets -s -N -e "INSERT INTO $APP_DB (file_path) VALUES ('$CHANGE')"
+				echo "Changeset successfully applied"
 			else
 				echo "Fatal error running changeset $CHANGE"
 				exit 1
