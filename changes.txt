@@ -1,1 +1,2 @@
 /cdc_hospitalizations/create.sql
+/cdc_hospitalizations/rename_mmwr_year_and_week.sql
