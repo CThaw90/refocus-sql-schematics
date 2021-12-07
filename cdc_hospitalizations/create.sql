@@ -1,7 +1,6 @@
 -- Creating the cdc_hospitalizations table
 CREATE TABLE cdc_hospitalizations (
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	public_key VARCHAR(10) NOT NULL UNIQUE,
 	catchment VARCHAR(30) NOT NULL,
 	network VARCHAR(25) NOT NULL,
 	mmwr_year SMALLINT NOT NULL,
