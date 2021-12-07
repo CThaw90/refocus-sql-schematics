@@ -41,11 +41,11 @@ while read CHANGE; do
 			echo "Applying changeset - $CHANGE"
 			mysql -h "$DB_HOST" -u"$DB_USER" "$APP_DB" -s -N -e "`cat $CHANGES_FILE_PATH`"
 			if [ $? -eq 0 ]; then
+				mysql -h "$DB_HOST" -u"$DB_USER" changesets -s -N -e "INSERT INTO $APP_DB (file_path) VALUES ('$CHANGE')"
+			else
 				echo "Fatal error running changeset $CHANGE"
 				exit 1
 			fi
-
-			mysql -h "$DB_HOST" -u"$DB_USER" changesets -s -N -e "INSERT INTO $APP_DB (file_path) VALUES ('$CHANGE')"
 		fi
 	else
 		echo "File $CHANGES_FILE_PATH not found"
