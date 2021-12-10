@@ -1,2 +1,3 @@
 /cdc_hospitalizations/create.sql
 /cdc_hospitalizations/increase_race_category_length.sql
+/state_trend_data/create.sql
