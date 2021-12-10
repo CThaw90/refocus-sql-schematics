@@ -26,7 +26,7 @@ CREATE TABLE state_trend_data (
 	pct_change_positivity_rate_7 DECIMAL(25, 15) NULL,
 	pct_change_positivity_rate_14 DECIMAL(25, 15) NULL,
 
-	population INTEGER NOT NULL
+	population INTEGER NOT NULL,
 	vaccines_distributed INTEGER NULL,
 	vaccines_administered INTEGER NULL,
 	vaccines_one_dose INTEGER NULL,
