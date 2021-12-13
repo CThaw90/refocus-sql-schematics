@@ -1,3 +1,5 @@
 /cdc_hospitalizations/create.sql
 /cdc_hospitalizations/increase_race_category_length.sql
 /state_trend_data/create.sql
+/state_trend_data/fix_tests_7_day_mean_column.sql
+/state_trend_data/add_column_hotspot.sql
