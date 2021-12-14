@@ -7,6 +7,6 @@ CREATE TABLE weekly_evictions (
 	state VARCHAR(30) NOT NULL,
 	racial_majority VARCHAR(25) NOT NULL,
 	filings SMALLINT NOT NULL,
-	filings_avg DECIMAL(20, 10) NOT NULL DEFAULT 0.0
+	filings_avg DECIMAL(20, 10) NOT NULL DEFAULT 0.0,
 	last_updated DATE NOT NULL
 );
