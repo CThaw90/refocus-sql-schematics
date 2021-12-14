@@ -6,3 +6,4 @@
 /state_trend_data/add_column_state.sql
 /police_shooting_data/create.sql
 /police_shooting_data/increase_name_column_length.sql
+/police_shooting_data/increase_armed_column_length.sql
