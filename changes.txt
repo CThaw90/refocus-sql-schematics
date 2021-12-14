@@ -4,3 +4,4 @@
 /state_trend_data/fix_tests_7_day_mean_column.sql
 /state_trend_data/add_column_hotspot.sql
 /state_trend_data/add_column_state.sql
+/police_shooting_data/create.sql
