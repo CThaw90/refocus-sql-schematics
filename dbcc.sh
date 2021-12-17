@@ -48,6 +48,7 @@ while read CHANGE; do
 		fi
 	else
 		echo "File $CHANGES_FILE_PATH not found"
+		exit 1
 	fi
 
 done < $CHANGES_HOME/$CHANGES_FILE
