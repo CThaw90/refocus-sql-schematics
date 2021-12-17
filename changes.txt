@@ -9,3 +9,4 @@
 /police_shooting_data/increase_armed_column_length.sql
 /weekly_evictions/create.sql
 /weekly_evictions/add_column_geo_id.sql
+/weekly_evictions/add_column_county.sql
