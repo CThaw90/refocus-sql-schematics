@@ -14,3 +14,4 @@
 /county_location_data/modify_column_geo_id_to_varchar.sql
 /county_location_data/remove_longitude_latitude_columns.sql
 /county_coordinates_data/create.sql
+/county_coordinates_data/modify_coordinate_columns_to_varchar.sql
