@@ -15,3 +15,4 @@
 /county_location_data/remove_longitude_latitude_columns.sql
 /county_coordinates_data/create.sql
 /county_coordinates_data/modify_coordinate_columns_to_varchar.sql
+/apha_map/create.sql
