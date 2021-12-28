@@ -18,3 +18,4 @@
 /apha_map/create.sql
 /apha_map/modify_date_column_to_allow_null.sql
 /apha_map/rename_column_link_to_declaration.sql
+/apha_map/increase_entity_name_column_length.sql
