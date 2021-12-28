@@ -16,3 +16,4 @@
 /county_coordinates_data/create.sql
 /county_coordinates_data/modify_coordinate_columns_to_varchar.sql
 /apha_map/create.sql
+/apha_map/modify_date_column_to_allow_null.sql
