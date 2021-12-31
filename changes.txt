@@ -20,3 +20,4 @@
 /apha_map/rename_column_link_to_declaration.sql
 /apha_map/increase_entity_name_column_length.sql
 /google_mobility/create.sql
+/google_mobility/add_additional_missing_columns.sql
