@@ -21,3 +21,6 @@
 /apha_map/increase_entity_name_column_length.sql
 /google_mobility/create.sql
 /google_mobility/add_additional_missing_columns.sql
+/cases_by_race_ethnicity/create.sql
+/deaths_by_race_ethnicity/create.sql
+/vaccinations_by_race_ethnicity/create.sql
