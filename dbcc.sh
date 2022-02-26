@@ -1,18 +1,11 @@
 if [ -z "$CHANGES_FILE" ]; then
 	echo "Missing environment variable CHANGES_FILE"
-	mysqladmin shutdown
-	exit 1
-elif [ -z "$DB_HOST" ]; then
-	echo "Missing environment variable DB_HOST"
-	exit 1
-elif [ -z "$DB_USER" ]; then
-	echo "Missing environment variable DB_USER"
-	exit 1
-elif [ -z "$DB_PASS" ]; then
-	echo "Missing environment variable DB_PASS"
 	exit 1
 elif [ -z "$CHANGES_DB" ]; then
 	echo "Missing environment variable CHANGES_DB"
+	exit 1
+elif [ -z "$LOGIN_PATH" ]; then
+	echo "Missing environment variable LOGIN_PATH"
 	exit 1
 elif [ -z "$APP_DB" ]; then
 	echo "Missing environment variable APP_DB"
@@ -28,18 +21,17 @@ if [ ! -f $CHANGES_HOME/$CHANGES_FILE ]; then
 	exit 1
 fi
 
-export MYSQL_PWD=$DB_PASS
 while read CHANGE; do
 	CHANGES_FILE_PATH="$CHANGES_HOME$CHANGE"
 	if [ -f $CHANGES_FILE_PATH ]; then
-		applied=`mysql -h "$DB_HOST" -u"$DB_USER" changesets -s -N -e "SELECT applied FROM $APP_DB WHERE file_path='$CHANGE' LIMIT 1"`
+		applied=`mysql --login-path="$LOGIN_PATH" changesets -s -N -e "SELECT applied FROM $APP_DB WHERE file_path='$CHANGE' LIMIT 1"`
 		if [ ${#applied} -eq 1 ]; then
 			echo "$CHANGE - has already been applied"
 		else
 			echo "Applying changeset - $CHANGE"
-			mysql -h "$DB_HOST" -u"$DB_USER" "$APP_DB" -s -N -e "`cat $CHANGES_FILE_PATH`"
+			mysql --login-path="$LOGIN_PATH" refocus -s -N -e "`cat $CHANGES_FILE_PATH`"
 			if [ $? -eq 0 ]; then
-				mysql -h "$DB_HOST" -u"$DB_USER" changesets -s -N -e "INSERT INTO $APP_DB (file_path) VALUES ('$CHANGE')"
+				mysql --login-path="$LOGIN_PATH" changesets -s -N -e "INSERT INTO $APP_DB (file_path) VALUES ('$CHANGE')"
 				echo "Changeset successfully applied"
 			else
 				echo "Fatal error running changeset $CHANGE"
@@ -52,6 +44,3 @@ while read CHANGE; do
 	fi
 
 done < $CHANGES_HOME/$CHANGES_FILE
-
-# This is a success code
-exit 200
