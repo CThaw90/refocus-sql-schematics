@@ -24,13 +24,16 @@ fi
 while read CHANGE; do
 	CHANGES_FILE_PATH="$CHANGES_HOME$CHANGE"
 	if [ -f $CHANGES_FILE_PATH ]; then
+		echo "mysql --login-path=$LOGIN_PATH changesets -s -N -e SELECT applied FROM $APP_DB WHERE file_path='$CHANGE' LIMIT 1"
 		applied=`mysql --login-path="$LOGIN_PATH" changesets -s -N -e "SELECT applied FROM $APP_DB WHERE file_path='$CHANGE' LIMIT 1"`
 		if [ ${#applied} -eq 1 ]; then
 			echo "$CHANGE - has already been applied"
 		else
 			echo "Applying changeset - $CHANGE"
+			echo "mysql --login-path=$LOGIN_PATH refocus -s -N -e `cat $CHANGES_FILE_PATH`"
 			mysql --login-path="$LOGIN_PATH" refocus -s -N -e "`cat $CHANGES_FILE_PATH`"
 			if [ $? -eq 0 ]; then
+				echo "mysql --login-path=$LOGIN_PATH changesets -s -N -e INSERT INTO $APP_DB (file_path) VALUES ('$CHANGE')"
 				mysql --login-path="$LOGIN_PATH" changesets -s -N -e "INSERT INTO $APP_DB (file_path) VALUES ('$CHANGE')"
 				echo "Changeset successfully applied"
 			else
