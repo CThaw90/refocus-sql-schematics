@@ -5,5 +5,5 @@ CREATE TABLE hrsa_vaccine_program (
 	city VARCHAR(50) NOT NULL,
 	county VARCHAR(50) NOT NULL,
 	state VARCHAR(50) NOT NULL,
-	participating TINTINT(1) NOT NULL
+	participating TINYINT(1) NOT NULL
 );
