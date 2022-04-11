@@ -24,3 +24,4 @@
 /cases_by_race_ethnicity/create.sql
 /deaths_by_race_ethnicity/create.sql
 /vaccinations_by_race_ethnicity/create.sql
+/hrsa_vaccine_program/create.sql
