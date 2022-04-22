@@ -25,3 +25,4 @@
 /deaths_by_race_ethnicity/create.sql
 /vaccinations_by_race_ethnicity/create.sql
 /hrsa_vaccine_program/create.sql
+/state_trend_data/add_column_positivity_rate.sql
