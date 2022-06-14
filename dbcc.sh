@@ -22,6 +22,9 @@ if [ ! -f $CHANGES_HOME/$CHANGES_FILE ]; then
 fi
 
 while read CHANGE; do
+	if [ -z "$CHANGE" ]; then
+		continue
+	fi
 	CHANGES_FILE_PATH="$CHANGES_HOME$CHANGE"
 	if [ -f $CHANGES_FILE_PATH ]; then
 		applied=`mysql --login-path="$LOGIN_PATH" changesets -s -N -e "SELECT applied FROM $APP_DB WHERE file_path='$CHANGE' LIMIT 1"`
