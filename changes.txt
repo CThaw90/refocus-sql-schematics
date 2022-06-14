@@ -28,3 +28,5 @@
 /state_trend_data/add_column_positivity_rate.sql
 /population/create.sql
 /state_trend_data/rename_column_to_positivity_rate_7_day_mean.sql
+/apha_map/add_column_declaration.sql
+
